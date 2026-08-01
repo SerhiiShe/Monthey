@@ -6,6 +6,7 @@ import { CtaBlock } from '@/blocks/CtaBlock'
 
 export const HomePage: GlobalConfig = {
   slug: 'home-page',
+  versions: { drafts: true },
   label: 'Home Page',
   fields: [
     {
