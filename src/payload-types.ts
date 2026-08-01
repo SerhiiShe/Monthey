@@ -201,6 +201,7 @@ export interface News {
   publishedDate?: string | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -211,6 +212,7 @@ export interface NewsCategory {
   name: string;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -347,6 +349,7 @@ export interface NewsSelect<T extends boolean = true> {
   publishedDate?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -356,6 +359,7 @@ export interface NewsCategoriesSelect<T extends boolean = true> {
   name?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -417,6 +421,7 @@ export interface HomePage {
         blockType: 'cta';
       }
   )[];
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -493,6 +498,7 @@ export interface Header {
         id?: string | null;
       }[]
     | null;
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -545,6 +551,7 @@ export interface Footer {
     | null;
   developerName?: string | null;
   developerLink?: string | null;
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -570,6 +577,7 @@ export interface HomePageSelect<T extends boolean = true> {
               blockName?: T;
             };
       };
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -643,6 +651,7 @@ export interface HeaderSelect<T extends boolean = true> {
         url?: T;
         id?: T;
       };
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -695,6 +704,7 @@ export interface FooterSelect<T extends boolean = true> {
       };
   developerName?: T;
   developerLink?: T;
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
