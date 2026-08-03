@@ -1,9 +1,19 @@
+import { revalidatePath } from 'next/cache'
 import type { GlobalConfig } from 'payload'
 
 export const Footer: GlobalConfig = {
   slug: 'footer',
   versions: { drafts: true },
   label: 'Footer',
+  hooks: {
+    afterChange: [
+      ({ doc }) => {
+        // Параметр 'layout' говорит Vercel сбросить кеш вообще для всех страниц
+        revalidatePath('/', 'layout')
+        return doc
+      },
+    ],
+  },
   fields: [
     { name: 'formLable', type: 'text', required: true },
     { name: 'formPlaceholder', type: 'text' },

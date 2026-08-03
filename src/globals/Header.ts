@@ -1,9 +1,19 @@
+import { revalidatePath } from 'next/cache'
 import type { GlobalConfig } from 'payload'
 
 export const Header: GlobalConfig = {
   slug: 'header',
   versions: { drafts: true },
   label: 'Header',
+  hooks: {
+    afterChange: [
+      ({ doc }) => {
+        // Параметр 'layout' говорит Vercel сбросить кеш вообще для всех страниц
+        revalidatePath('/', 'layout')
+        return doc
+      },
+    ],
+  },
   fields: [
     {
       name: 'navLinks',

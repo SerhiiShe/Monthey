@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache'
 import type { GlobalConfig } from 'payload'
 import { HeroBlock } from '@/blocks/HeroBlock'
 import { FeaturesBlock } from '@/blocks/FeaturesBlock'
@@ -8,6 +9,14 @@ export const HomePage: GlobalConfig = {
   slug: 'home-page',
   versions: { drafts: true },
   label: 'Home Page',
+  hooks: {
+    afterChange: [
+      ({ doc }) => {
+        revalidatePath('/')
+        return doc
+      },
+    ],
+  },
   fields: [
     {
       name: 'layout',
