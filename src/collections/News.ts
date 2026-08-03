@@ -14,7 +14,7 @@ export const News: CollectionConfig = {
     afterChange: [
       ({ doc, operation }) => {
         if (operation === 'create' || operation === 'update') {
-          revalidatePath('/news')
+          revalidatePath('/')
           revalidatePath(`/news/${doc.id}`)
 
           console.log(`Cache for post ${doc.title} successfully reset!`)
