@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache'
 import type { CollectionConfig } from 'payload'
 
 export const News: CollectionConfig = {
@@ -5,8 +6,24 @@ export const News: CollectionConfig = {
   versions: {
     drafts: true,
   },
+  // it needs testing
   admin: {
     useAsTitle: 'title',
+    livePreview: { url: ({ data }) => `https://monthey.vercel.app/api/preview?slug=${data.slug}` },
+  },
+  hooks: {
+    afterChange: [
+      ({ doc, operation }) => {
+        if (operation === 'create' || operation === 'update') {
+          revalidatePath('/blog')
+          revalidatePath(`/blog/${doc.id}`)
+
+          console.log(`Cache for post ${doc.title} successfully reset!`)
+        }
+
+        return doc
+      },
+    ],
   },
   fields: [
     {
