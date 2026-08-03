@@ -8,7 +8,6 @@ export const Footer: GlobalConfig = {
   hooks: {
     afterChange: [
       ({ doc }) => {
-        // Параметр 'layout' говорит Vercel сбросить кеш вообще для всех страниц
         revalidatePath('/', 'layout')
         return doc
       },

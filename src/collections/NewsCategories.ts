@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache'
 import type { CollectionConfig } from 'payload'
 
 export const NewsCategories: CollectionConfig = {
@@ -7,6 +8,20 @@ export const NewsCategories: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
+  },
+  hooks: {
+    afterChange: [
+      ({ doc, operation }) => {
+        if (operation === 'create' || operation === 'update') {
+          revalidatePath('/news-categories')
+          revalidatePath(`/news-categories/${doc.id}`)
+
+          console.log(`Cache for news categories ${doc.title} successfully reset!`)
+        }
+
+        return doc
+      },
+    ],
   },
   fields: [
     {
