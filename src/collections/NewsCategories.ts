@@ -13,8 +13,7 @@ export const NewsCategories: CollectionConfig = {
     afterChange: [
       ({ doc, operation }) => {
         if (operation === 'create' || operation === 'update') {
-          revalidatePath('/news-categories')
-          revalidatePath(`/news-categories/${doc.id}`)
+          revalidatePath('/', 'layout')
 
           console.log(`Cache for news categories ${doc.title} successfully reset!`)
         }
