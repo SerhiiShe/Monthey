@@ -23,8 +23,14 @@ export default async function SinglePostPage({ params }: { params: Promise<{ id:
   return (
     <main className="max-w-3xl mx-auto p-8 mt-30">
       {isDraftMode && (
-        <div className="bg-yellow-100 text-yellow-800 p-2 text-center rounded-md mb-8 text-sm font-bold">
-          Note: You are in draft preview mode.
+        <div className="bg-yellow-100 text-yellow-800 p-3 px-4 rounded-md mb-8 text-sm font-bold flex justify-between items-center shadow-sm border border-yellow-200">
+          <span>Note: You are in draft preview mode.</span>
+          <a
+            href="/api/disable-preview"
+            className="bg-yellow-200 hover:bg-yellow-300 text-yellow-900 px-3 py-1 rounded transition-colors"
+          >
+            Exit Preview Mode
+          </a>
         </div>
       )}
 
