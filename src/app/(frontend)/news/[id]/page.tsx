@@ -4,14 +4,19 @@ import Link from 'next/link'
 // Импортируем готовый компонент конвертера
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import Image from 'next/image'
+import { draftMode } from 'next/headers'
 
 export default async function SinglePostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const payload = await getPayload({ config: configPromise })
 
+  const draft = await draftMode()
+  const isDraftMode = draft.isEnabled
+
   const post = await payload.findByID({
     collection: 'news',
     id: id,
+    draft: isDraftMode,
   })
 
   console.log(post)

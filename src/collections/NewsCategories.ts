@@ -21,6 +21,15 @@ export const NewsCategories: CollectionConfig = {
         return doc
       },
     ],
+    afterDelete: [
+      ({ doc }) => {
+        revalidatePath('/', 'layout')
+
+        console.log(`Cache for news categories ${doc.title} successfully reset!`)
+
+        return doc
+      },
+    ],
   },
   fields: [
     {

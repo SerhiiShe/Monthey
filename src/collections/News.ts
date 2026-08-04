@@ -6,10 +6,15 @@ export const News: CollectionConfig = {
   versions: {
     drafts: true,
   },
-  // admin: {
-  //   useAsTitle: 'title',
-  //   livePreview: { url: ({ data }) => `https://monthey.vercel.app/api/preview?slug=${data.slug}` },
-  // },
+  admin: {
+    useAsTitle: 'title',
+    preview: (doc) => {
+      if (doc?.id) {
+        return `http://localhost:3000/api/preview?url=/news/${doc.id}&secret=${process.env.PREVIEW_SECRET_TOKEN}`
+      }
+      return null
+    },
+  },
   hooks: {
     afterChange: [
       ({ doc, operation }) => {
@@ -17,8 +22,18 @@ export const News: CollectionConfig = {
           revalidatePath('/')
           revalidatePath(`/news/${doc.id}`)
 
-          console.log(`Cache for post ${doc.title} successfully reset!`)
+          console.log(`Cache for news ${doc.title} successfully reset!`)
         }
+
+        return doc
+      },
+    ],
+    afterDelete: [
+      ({ doc }) => {
+        revalidatePath('/')
+        revalidatePath(`/news/${doc.id}`)
+
+        console.log(`Cache for news ${doc.title} successfully reset!`)
 
         return doc
       },
