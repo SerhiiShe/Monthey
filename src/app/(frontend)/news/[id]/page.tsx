@@ -1,7 +1,6 @@
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import Link from 'next/link'
-// Импортируем готовый компонент конвертера
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import Image from 'next/image'
 import { draftMode } from 'next/headers'
@@ -23,6 +22,12 @@ export default async function SinglePostPage({ params }: { params: Promise<{ id:
 
   return (
     <main className="max-w-3xl mx-auto p-8 mt-30">
+      {isDraftMode && (
+        <div className="bg-yellow-100 text-yellow-800 p-2 text-center rounded-md mb-8 text-sm font-bold">
+          Note: You are in draft preview mode.
+        </div>
+      )}
+
       <Link
         href="/"
         className="text-gray-500 hover:text-black hover:underline mb-8 inline-block transition-colors"
@@ -34,9 +39,7 @@ export default async function SinglePostPage({ params }: { params: Promise<{ id:
         <header className="mb-10">
           <h1 className="text-4xl font-extrabold text-gray-900 mb-4">{post.title}</h1>
           <p className="text-gray-500">
-            {post.publishedDate
-              ? new Date(post.publishedDate).toLocaleDateString('de-CH')
-              : 'Без даты'}
+            {post.publishedDate ? new Date(post.publishedDate).toLocaleDateString('de-CH') : ''}
           </p>
         </header>
 
