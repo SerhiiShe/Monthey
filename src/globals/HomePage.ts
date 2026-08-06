@@ -9,6 +9,11 @@ export const HomePage: GlobalConfig = {
   slug: 'home-page',
   versions: { drafts: true },
   label: 'Home Page',
+  admin: {
+    preview: () => {
+      return `${process.env.NEXT_PUBLIC_SERVER_URL}/api/preview?url=/&secret=${process.env.PREVIEW_SECRET_TOKEN}`
+    },
+  },
   hooks: {
     afterChange: [
       ({ doc }) => {

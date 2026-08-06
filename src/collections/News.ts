@@ -10,7 +10,7 @@ export const News: CollectionConfig = {
     useAsTitle: 'title',
     preview: (doc) => {
       if (doc?.id) {
-        return `https://monthey.vercel.app/api/preview?url=/news/${doc.id}&secret=${process.env.PREVIEW_SECRET_TOKEN}`
+        return `${process.env.NEXT_PUBLIC_SERVER_URL}/api/preview?url=/news/${doc.id}&secret=${process.env.PREVIEW_SECRET_TOKEN}`
       }
       return null
     },

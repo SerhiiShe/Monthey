@@ -8,6 +8,9 @@ export const NewsCategories: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
+    preview: () => {
+      return `${process.env.NEXT_PUBLIC_SERVER_URL}/api/preview?url=/&secret=${process.env.PREVIEW_SECRET_TOKEN}`
+    },
   },
   hooks: {
     afterChange: [
