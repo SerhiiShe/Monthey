@@ -9,31 +9,15 @@ export default async function SinglePostPage({ params }: { params: Promise<{ id:
   const { id } = await params
   const payload = await getPayload({ config: configPromise })
 
-  const draft = await draftMode()
-  const isDraftMode = draft.isEnabled
-
   const post = await payload.findByID({
     collection: 'news',
     id: id,
-    draft: isDraftMode,
   })
 
   console.log(post)
 
   return (
     <main className="max-w-3xl mx-auto p-8 mt-30">
-      {isDraftMode && (
-        <div className="bg-yellow-100 text-yellow-800 p-3 px-4 rounded-md mb-8 text-sm font-bold flex justify-between items-center shadow-sm border border-yellow-200">
-          <span>Note: You are in draft preview mode.</span>
-          <a
-            href="/api/disable-preview"
-            className="bg-yellow-200 hover:bg-yellow-300 text-yellow-900 px-3 py-1 rounded transition-colors"
-          >
-            Exit Preview Mode
-          </a>
-        </div>
-      )}
-
       <Link
         href="/"
         className="text-gray-500 hover:text-black hover:underline mb-8 inline-block transition-colors"

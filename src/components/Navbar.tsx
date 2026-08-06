@@ -7,11 +7,23 @@ import { MontheyLogoSymbol } from './ui/icons/MontheyLogoSymbol'
 import { MenuIcon } from './ui/icons/MenuIcon'
 import { AccessibilityIcon } from './ui/icons/AccessibilityIcon'
 
-export default function Navbar({ navLinks }: HeaderType) {
+export default function Navbar({ navLinks, isDraftMode }: HeaderType & { isDraftMode: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 px-8 py-6 bg-transparent flex justify-between items-start">
+      {isDraftMode && (
+        <div className="bg-yellow-100 text-yellow-800 p-3 px-4 rounded-md mb-8 text-sm font-bold flex justify-between items-center shadow-sm border border-yellow-200">
+          <span>Note: You are in draft preview mode.</span>
+          <a
+            href="/api/disable-preview"
+            className="bg-yellow-200 hover:bg-yellow-300 text-yellow-900 px-3 py-1 rounded transition-colors"
+          >
+            Exit Preview Mode
+          </a>
+        </div>
+      )}
+
       {/* Left side: Logo */}
       <Link href="/" className="flex items-center gap-3 group max-w-[30vw]">
         <MontheyLogoSymbol />
