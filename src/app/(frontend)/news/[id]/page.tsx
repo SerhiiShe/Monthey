@@ -9,9 +9,13 @@ export default async function SinglePostPage({ params }: { params: Promise<{ id:
   const { id } = await params
   const payload = await getPayload({ config: configPromise })
 
+  const draft = await draftMode()
+  const isDraftMode = draft.isEnabled
+
   const post = await payload.findByID({
     collection: 'news',
     id: id,
+    draft: isDraftMode,
   })
 
   console.log(post)

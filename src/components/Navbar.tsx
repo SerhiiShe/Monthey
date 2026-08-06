@@ -12,8 +12,13 @@ export default function Navbar({ navLinks, isDraftMode }: HeaderType & { isDraft
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 px-8 py-6 bg-transparent flex justify-between items-start">
+      {/* Left side: Logo */}
+      <Link href="/" className="flex items-center gap-3 group max-w-[30vw]">
+        <MontheyLogoSymbol />
+      </Link>
+
       {isDraftMode && (
-        <div className="bg-yellow-100 text-yellow-800 p-3 px-4 rounded-md mb-8 text-sm font-bold flex justify-between items-center shadow-sm border border-yellow-200">
+        <div className="bg-yellow-100 text-yellow-800 p-3 px-4 gap-4 rounded-md mb-8 text-sm font-bold flex justify-between items-center shadow-sm border border-yellow-200">
           <span>Note: You are in draft preview mode.</span>
           <a
             href="/api/disable-preview"
@@ -23,11 +28,6 @@ export default function Navbar({ navLinks, isDraftMode }: HeaderType & { isDraft
           </a>
         </div>
       )}
-
-      {/* Left side: Logo */}
-      <Link href="/" className="flex items-center gap-3 group max-w-[30vw]">
-        <MontheyLogoSymbol />
-      </Link>
 
       {/* Right side: Buttons and drop-down menu */}
       <div className="relative flex items-center gap-4">

@@ -4,8 +4,11 @@ import { MontheyLogoSymbol } from './ui/icons/MontheyLogoSymbol'
 import { ChevronDownIcon } from './ui/icons/ChevronDownIcon'
 import type { Footer } from '@/payload-types'
 import { getPayload } from 'payload'
+import { draftMode } from 'next/headers'
 
 export default async function Footer() {
+  const draft = await draftMode()
+  const isDraftMode = draft.isEnabled
   const payload = await getPayload({ config: configPromise })
   const {
     formLable,
@@ -27,7 +30,10 @@ export default async function Footer() {
     bottomLinks,
     developerName,
     developerLink,
-  } = await payload.findGlobal({ slug: 'footer' })
+  } = await payload.findGlobal({
+    slug: 'footer',
+    draft: isDraftMode,
+  })
 
   return (
     <footer className="bg-[#032948] text-white pt-16 pb-6 px-6 lg:px-12 font-sans">
